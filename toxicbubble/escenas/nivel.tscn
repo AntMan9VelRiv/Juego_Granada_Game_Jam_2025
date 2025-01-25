@@ -1,8 +1,9 @@
-[gd_scene load_steps=8 format=3 uid="uid://jrw34epf6kt5"]
+[gd_scene load_steps=9 format=3 uid="uid://jrw34epf6kt5"]
 
 [ext_resource type="Script" path="res://escenas/nivel.gd" id="1_7rx7n"]
 [ext_resource type="PackedScene" uid="uid://c2ucm3i8iqqna" path="res://escenas/latoxica.tscn" id="2_y5ius"]
 [ext_resource type="PackedScene" uid="uid://0g17gwpfmeay" path="res://escenas/personaje.tscn" id="3_tp6sr"]
+[ext_resource type="PackedScene" uid="uid://b0gq0iotxtbf6" path="res://escenas/burbuja_alcantarilla.tscn" id="4_udd3e"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_5wg1a"]
 size = Vector2(1612, 161)
@@ -50,9 +51,13 @@ shape = SubResource("RectangleShape2D_gs287")
 
 [node name="burbujatoxica" parent="." groups=["Player"] instance=ExtResource("2_y5ius")]
 position = Vector2(807, 440)
+scale = Vector2(3, 3)
 
 [node name="personaje" parent="." instance=ExtResource("3_tp6sr")]
 position = Vector2(231, 308)
+
+[node name="Camera2D" type="Camera2D" parent="personaje"]
+zoom = Vector2(2, 2)
 
 [node name="Label" type="Label" parent="."]
 custom_minimum_size = Vector2(150, 70)
@@ -62,3 +67,7 @@ offset_right = 46.0
 offset_bottom = 24.0
 scale = Vector2(2, 2)
 text = "VIDAS: 0"
+
+[node name="BurbujaAlcantarilla" parent="." instance=ExtResource("4_udd3e")]
+position = Vector2(1111, 455)
+scale = Vector2(2, 2)

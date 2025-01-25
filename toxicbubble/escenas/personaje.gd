@@ -35,7 +35,15 @@ func _physics_process(delta: float) -> void:
 	if Input.is_action_just_pressed("ui_accept") and is_on_floor():
 		velocity.y = VELOCIDAD_SALTO
 		if direccion > 0:
+			cambiar_animacion("saltar_derecha")
+		elif direccion < 0:
 			cambiar_animacion("saltar_izquierda")
+		else:
+			# Si está quieto y salta, elige la animación según la última dirección de disparo
+			if direccion_disparo == Vector2.RIGHT:
+				cambiar_animacion("saltar_derecha")
+			else:
+				cambiar_animacion("saltar_izquierda")
 
 	# Manejar movimiento del personaje
 	if direccion:
@@ -48,9 +56,20 @@ func _physics_process(delta: float) -> void:
 			direccion_disparo = Vector2.LEFT  
 	else:
 		velocity.x = move_toward(velocity.x, 0, VELOCIDAD)
-		cambiar_animacion("quieto")
+		
+		# Si el personaje está en el suelo, cambiar animación a quieto
+		if is_on_floor():
+			cambiar_animacion("quieto")
+
+	# Detectar si está en el aire y cambiar animación según dirección
+	if not is_on_floor():
+		if direccion_disparo == Vector2.RIGHT:
+			cambiar_animacion("saltar_derecha")
+		else:
+			cambiar_animacion("saltar_izquierda")
 
 	move_and_slide()
+
 
 	# Comprobar colisión después de moverse
 	for i in range(get_slide_collision_count()):

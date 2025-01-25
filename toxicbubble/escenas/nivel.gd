@@ -1,19 +1,19 @@
 extends Node2D
 
-@onready var label_vidas: Label = $Label  # Referencia al Label en pantalla
+@onready var label_vidas: Label = $LabelVidas # Referencia al Label en pantalla
 @onready var personaje: CharacterBody2D = $personaje  # Referencia al personaje principal
 @export var rigidbody_to_change: RigidBody2D  # Export para asignarlo desde el editor
 
 @onready var area_detector: Area2D = $Area2D  # Referencia al Area2D
+@onready var label_burbujas: Label = $LabelBurbujas # Referencia al label de burbujas en pantalla
 
 func _ready():
 	# Asignar referencias al controlador si existe
 	if Controlador:
 		Controlador.asignar_personaje(personaje)
 		Controlador.asignar_label_vidas(label_vidas)
-
-	# Conectar la señal del área
-	area_detector.body_entered.connect(_on_area_2d_body_entered)
+		Controlador.asignar_label_burbujas(label_burbujas)
+		Controlador.total_burbujas = 1	
 
 func _on_area_2d_body_entered(body: Node2D) -> void:
 	if body == personaje:  # Asegurarnos de que sea el personaje exacto

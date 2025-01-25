@@ -25,8 +25,10 @@ func _process(delta):
 
 # Detectar colisiones con cuerpos
 func _on_Habilidad_body_entered(body: Node) -> void:
-	# Acciones cuando la habilidad colisiona con algo
-	queue_free()  # Destruir la habilidad al colisionar
+	if body.is_in_group("enemigo"):  # Si golpea un enemigo (burbuja)
+		if body.has_method("recibir_golpe"):  # Verifica que el enemigo tenga el método "recibir_golpe"
+			body.recibir_golpe()  # Llama al método de la burbuja para manejar el golpe
+	queue_free()  # La habilidad siempre se destruye después de colisionar
 	
 func cambiar_animacion(nueva_animacion):
 	if nueva_animacion != animacion_actual:

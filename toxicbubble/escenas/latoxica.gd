@@ -8,6 +8,10 @@ const INTERVALO_CAMBIO_DIRECCION = 2.0
 
 const SEPARACION = 20.0  # Distancia mínima para separar al objeto tras colisión
 
+# Nueva variable para los golpes necesarios para destruir la burbuja
+var golpes_necesarios = 3
+var golpes_recibidos = 0  # Contador de golpes recibidos
+
 #Dirección inicial
 var direction: Vector2 = Vector2(1, 0) 
 var base_y: float = 0.0  # Posición base en Y
@@ -76,12 +80,28 @@ func cambiar_direccion() -> void:
 	
 func actualizar_sprite() -> void:
 	sprite.scale.x = -1 if direction.x < 0 else 1
-	
-	
+		
 
+
+func recibir_golpe():
+	golpes_recibidos += 1
+	print("Golpes recibidos: ", golpes_recibidos)  # Depuración en consola
+
+	if golpes_recibidos >= golpes_necesarios:
+		queue_free()  # Destruir la burbuja si alcanza el número de golpes necesarios
+		var controlador = get_tree().get_root().get_node("Controlador")
+		if controlador:
+			controlador.actualizar_burbujas_destruidas()
 
 func _on_area_2d_body_entered(body: Node2D) -> void:
-	if body.is_in_group("personaje"):
-		body._on_hurt()
-		
-	pass # Replace with function body.
+	
+	if body.is_in_group("habilidad"):  # Detectar si el objeto colisionado es una habilidad
+		golpes_recibidos += 1  # Incrementar el contador de golpes
+		print("Golpes recibidos: ", golpes_recibidos)  # Depuración en consola
+
+		if golpes_recibidos >= golpes_necesarios:
+			# Destruir la burbuja si alcanza el número de golpes necesarios
+			queue_free()
+			var controlador = get_tree().get_root().get_node("Controlador")
+			if controlador:
+				controlador.actualizar_burbujas_destruidas()

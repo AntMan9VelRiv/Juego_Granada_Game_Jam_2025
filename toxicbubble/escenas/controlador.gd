@@ -2,11 +2,15 @@ extends Node
 
 var vidas_iniciales = 3  # Número inicial de vidas
 var vidas_actuales = vidas_iniciales  # Contador actual de vidas
-
+var burbujas_destruidas = 0  # Contador de burbujas destruidas
+var total_burbujas = 0
+var derrota = false
 var ruta_etiqueta_nivel: Label = null  # Referencia al Label en pantalla
 var current_scene: Node = null  # Referencia a la escena actual
 
-@onready var personaje: Node = null  # Referencia al personaje principal
+var ruta_etiqueta_burbujas= null # Referencia al Label de burbuja en pantalla
+
+@onready var personaje = null  # Referencia al personaje principal+
 
 func _ready():
 	# Inicializar la escena actual
@@ -22,15 +26,20 @@ func asignar_label_vidas(label_nodo: Label):
 	actualizar_vidas()
 
 func restar_vida():
+	if derrota:  # Si ya está en derrota, no hacer nada
+		return
+
 	# Resta una vida y actualiza la pantalla
 	vidas_actuales -= 1
 	actualizar_vidas()
 
 	if vidas_actuales <= 0:
 		print("Vidas agotadas. Reiniciando nivel...")
-		goto_scene("res://escenas/nivel.tscn")  # Cambia esta ruta según tu nivel
+		derrota = true  # Marca que el jugador está en derrota
+		goto_derrota()  # Cambia a la escena de derrota
 	else:
 		reposicionar_personaje()
+
 
 func actualizar_vidas():
 	# Actualiza el texto del contador en pantalla
@@ -68,5 +77,50 @@ func _deferred_goto_scene(path: String):
 		print("Error: No se pudo cargar la escena en la ruta:", path)
 
 func jugadorCaido():
-	print("Jugador caído. Reiniciando escena...")
-	goto_scene("res://escenas/nivel.tscn")
+	vidas_actuales -= 1
+	actualizar_vidas()
+	if vidas_actuales <= 0:
+		derrota = true
+		goto_derrota()
+	else:
+		print("Jugador caído. Reiniciando escena...")
+		goto_scene("res://escenas/nivel.tscn")
+	
+func goto_victoria():
+	call_deferred("_deferred_change_scene", "res://escenas/victoria.tscn")
+
+func goto_derrota():
+	call_deferred("_deferred_change_scene", "res://escenas/derrota.tscn")
+
+func _deferred_change_scene(ruta: String):
+	get_tree().change_scene_to_file(ruta)
+	
+func asignar_label_burbujas(label_nodo: Label):
+	ruta_etiqueta_burbujas = label_nodo
+	actualizar_burbujas_label()
+
+func actualizar_burbujas_label():
+	if ruta_etiqueta_burbujas:
+		ruta_etiqueta_burbujas.text = "BURBUJAS: " + str(burbujas_destruidas)
+
+func actualizar_burbujas_destruidas():
+	burbujas_destruidas += 1
+	actualizar_burbujas_label()  # Actualiza el Label en pantalla
+	if burbujas_destruidas >= total_burbujas:
+		goto_victoria()
+	print("Burbujas destruidas: ", burbujas_destruidas)
+	
+func reiniciar_variables():
+	# Reinicia las variables del juego
+	vidas_actuales = vidas_iniciales  # Reinicia el contador de vidas
+	burbujas_destruidas = 0  # Reinicia el contador de burbujas
+
+	# Reinicia las referencias a los Labels (pueden ser reasignadas en _ready)
+	ruta_etiqueta_nivel = null
+	ruta_etiqueta_burbujas = null
+	# Si las referencias a los Labels son válidas, actualiza su texto
+	if is_instance_valid(ruta_etiqueta_nivel):
+		ruta_etiqueta_nivel.text = "VIDAS: " + str(vidas_actuales)
+	if is_instance_valid(ruta_etiqueta_burbujas):
+		ruta_etiqueta_burbujas.text = "BURBUJAS: " + str(burbujas_destruidas)
+	

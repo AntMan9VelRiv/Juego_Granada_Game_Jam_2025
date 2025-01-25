@@ -1,7 +1,7 @@
 extends CharacterBody2D
 
 const VELOCIDAD = 300.0
-const VELOCIDAD_SALTO = -400.0
+const VELOCIDAD_SALTO = -500.0
 
 # Dirección inicial del disparo (por defecto hacia la derecha)
 var direccion_disparo = Vector2.RIGHT
@@ -12,9 +12,15 @@ var direccion_disparo = Vector2.RIGHT
 var espacio_entre_habilidad_personaje = 40.0
 var distancia_ejey_habilidad = 0  # Ajustar esta variable para mover la habilidad hacia abajo
 
-# Se asume que el personaje tiene un Sprite o un CollisionShape2D
 # Se usará el offset para lanzar la habilidad a una altura más baja
 var altura_offset = 10.0  # Ajusta este valor para mover la habilidad hacia abajo más desde el personaje
+
+# Representa la animacion actual
+var animacion_actual = null
+
+func _ready() -> void:
+	$Sprite2D/AnimationPlayer.play("quieto")
+	animacion_actual = "quieto"
 
 func _physics_process(delta: float) -> void:
 	# Aplicar gravedad
@@ -30,11 +36,14 @@ func _physics_process(delta: float) -> void:
 	if direccion:
 		velocity.x = direccion * VELOCIDAD
 		if direccion > 0:
+			cambiar_animacion("andar_derecha")
 			direccion_disparo = Vector2.RIGHT  # Actualizar dirección del disparo
 		elif direccion < 0:
+			cambiar_animacion("andar_izquierda")
 			direccion_disparo = Vector2.LEFT  # Actualizar dirección del disparo
 	else:
 		velocity.x = move_toward(velocity.x, 0, VELOCIDAD)
+		cambiar_animacion("quieto")
 
 	move_and_slide()
 
@@ -60,3 +69,8 @@ func _input(event: InputEvent) -> void:
 
 		# Agregamos la habilidad como hijo de la escena del jugador
 		get_parent().add_child(nuevaHabilidad)
+		
+func cambiar_animacion(nueva_animacion):
+	if nueva_animacion != animacion_actual:
+		$Sprite2D/AnimationPlayer.play(nueva_animacion)
+		animacion_actual = nueva_animacion

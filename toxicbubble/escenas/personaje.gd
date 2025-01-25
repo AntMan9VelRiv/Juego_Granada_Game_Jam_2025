@@ -9,7 +9,7 @@ var direccion_disparo = Vector2.RIGHT
 @export var habilidad: PackedScene # Obtener la habilidad como nodo hijo
 
 # Distancia extra para evitar que la habilidad se choque con el personaje
-var espacio_entre_habilidad_personaje = 20.0
+var espacio_entre_habilidad_personaje = 40.0
 var distancia_ejey_habilidad = 0  # Ajustar esta variable para mover la habilidad hacia abajo
 
 # Se asume que el personaje tiene un Sprite o un CollisionShape2D

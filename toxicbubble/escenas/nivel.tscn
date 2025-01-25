@@ -1,7 +1,8 @@
-[gd_scene load_steps=7 format=3 uid="uid://jrw34epf6kt5"]
+[gd_scene load_steps=8 format=3 uid="uid://jrw34epf6kt5"]
 
 [ext_resource type="Script" path="res://escenas/nivel.gd" id="1_7rx7n"]
 [ext_resource type="PackedScene" uid="uid://c2ucm3i8iqqna" path="res://escenas/latoxica.tscn" id="2_y5ius"]
+[ext_resource type="PackedScene" uid="uid://0g17gwpfmeay" path="res://escenas/personaje.tscn" id="3_tp6sr"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_5wg1a"]
 size = Vector2(1612, 161)
@@ -49,3 +50,6 @@ shape = SubResource("RectangleShape2D_gs287")
 
 [node name="CharacterBody2D" parent="." instance=ExtResource("2_y5ius")]
 position = Vector2(807, 440)
+
+[node name="personaje" parent="." instance=ExtResource("3_tp6sr")]
+position = Vector2(231, 308)

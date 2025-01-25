@@ -1,0 +1,51 @@
+[gd_scene load_steps=7 format=3 uid="uid://jrw34epf6kt5"]
+
+[ext_resource type="Script" path="res://escenas/nivel.gd" id="1_7rx7n"]
+[ext_resource type="PackedScene" uid="uid://c2ucm3i8iqqna" path="res://escenas/latoxica.tscn" id="2_y5ius"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_5wg1a"]
+size = Vector2(1612, 161)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_jkr2y"]
+size = Vector2(253, 58.625)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_tgxy0"]
+size = Vector2(135.5, 126)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_gs287"]
+size = Vector2(305, 160.5)
+
+[node name="Node2D" type="Node2D"]
+position = Vector2(-2, 1)
+script = ExtResource("1_7rx7n")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+position = Vector2(15, -10)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(615, 572)
+shape = SubResource("RectangleShape2D_5wg1a")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(571, 188)
+shape = SubResource("RectangleShape2D_jkr2y")
+
+[node name="CollisionShape2D3" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(223, 429)
+shape = SubResource("RectangleShape2D_tgxy0")
+
+[node name="CollisionShape2D4" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(931, 426)
+shape = SubResource("RectangleShape2D_tgxy0")
+
+[node name="TileMapLayer" type="TileMapLayer" parent="."]
+
+[node name="RigidBody2D" type="RigidBody2D" parent="."]
+gravity_scale = 0.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="RigidBody2D"]
+position = Vector2(1592, 563)
+shape = SubResource("RectangleShape2D_gs287")
+
+[node name="CharacterBody2D" parent="." instance=ExtResource("2_y5ius")]
+position = Vector2(807, 440)

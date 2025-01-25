@@ -1,0 +1,9 @@
+Pasos para subir al repositorio de github
+
+git pull --rebase
+
+git add loquesea
+
+git commit -m "Comentario del commit"
+
+git push

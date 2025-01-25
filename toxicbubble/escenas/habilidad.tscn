@@ -1,7 +1,22 @@
 [gd_scene load_steps=7 format=3 uid="uid://uxlhqy3hujl2"]
 
 [ext_resource type="Script" path="res://escenas/habilidad.gd" id="1_jo4qo"]
-[ext_resource type="Texture2D" uid="uid://bu0aol85c7cru" path="res://graficos/burbija derecha.png" id="2_tu186"]
+[ext_resource type="Texture2D" uid="uid://bsd04buifg4r3" path="res://graficos/burbujaAzul.png" id="2_818ri"]
+
+[sub_resource type="Animation" id="Animation_80s75"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("../../Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
 
 [sub_resource type="Animation" id="Animation_nlunb"]
 resource_name = "habilidad_derecha"
@@ -20,21 +35,6 @@ tracks/0/keys = {
 "values": [0, 1, 2, 3, 4, 4]
 }
 
-[sub_resource type="Animation" id="Animation_80s75"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("../../Sprite2D:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [0]
-}
-
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_ycwil"]
 _data = {
 "RESET": SubResource("Animation_80s75"),
@@ -48,8 +48,9 @@ radius = 13.0384
 script = ExtResource("1_jo4qo")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-texture = ExtResource("2_tu186")
+texture = ExtResource("2_818ri")
 hframes = 5
+vframes = 2
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Sprite2D"]
 root_node = NodePath("../../Area2D/CollisionShape2D")

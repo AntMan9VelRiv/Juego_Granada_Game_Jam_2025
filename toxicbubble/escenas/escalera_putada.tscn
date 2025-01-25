@@ -1,0 +1,54 @@
+[gd_scene load_steps=7 format=3 uid="uid://b0juh7y73ylc8"]
+
+[ext_resource type="Script" path="res://escenas/escalera_putada.gd" id="1_exqo7"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_j6l4y"]
+size = Vector2(50, 24)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_nbsr2"]
+size = Vector2(50.5, 25)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_xajuf"]
+size = Vector2(49.5, 23.5)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_rwbrg"]
+size = Vector2(51.25, 22)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_bilji"]
+size = Vector2(54.5, 23.5)
+
+[node name="escaleraPutada" type="RigidBody2D"]
+collision_mask = 0
+gravity_scale = 0.0
+script = ExtResource("1_exqo7")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(26, 14)
+shape = SubResource("RectangleShape2D_j6l4y")
+
+[node name="Escalon1" type="RigidBody2D" parent="."]
+gravity_scale = 0.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Escalon1"]
+position = Vector2(78, 42)
+shape = SubResource("RectangleShape2D_nbsr2")
+
+[node name="Area2D" type="Area2D" parent="Escalon1"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Escalon1/Area2D"]
+position = Vector2(131, 69)
+shape = SubResource("RectangleShape2D_xajuf")
+
+[node name="Escalon2" type="RigidBody2D" parent="."]
+position = Vector2(-8, 52)
+gravity_scale = 0.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Escalon2"]
+position = Vector2(191.625, 43)
+shape = SubResource("RectangleShape2D_rwbrg")
+
+[node name="Area2D" type="Area2D" parent="Escalon2"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Escalon2/Area2D"]
+position = Vector2(245.75, 69.25)
+shape = SubResource("RectangleShape2D_bilji")

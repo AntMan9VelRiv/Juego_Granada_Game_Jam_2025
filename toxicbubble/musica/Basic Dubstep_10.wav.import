@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://7vym1s5tyg6q"
+path="res://.godot/imported/Basic Dubstep_10.wav-fc0ce3ba0ad37b17def7e184aa5b1df5.sample"
+
+[deps]
+
+source_file="res://musica/Basic Dubstep_10.wav"
+dest_files=["res://.godot/imported/Basic Dubstep_10.wav-fc0ce3ba0ad37b17def7e184aa5b1df5.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=0

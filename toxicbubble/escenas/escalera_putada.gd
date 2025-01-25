@@ -21,6 +21,10 @@ func _ready() -> void:
 	escalon1_pos_inicial = escalon1.position
 	escalon2_pos_inicial = escalon2.position
 
+	# Aplicar la escala de la escena a los escalones
+	escalon1.scale = self.scale
+	escalon2.scale = self.scale
+
 	# Conectar señales de colisión a las áreas
 	area_escalon1.connect("body_entered", Callable(self, "_on_escalon_colision"))
 	area_escalon2.connect("body_entered", Callable(self, "_on_escalon_colision"))

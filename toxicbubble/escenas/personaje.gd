@@ -21,31 +21,45 @@ var animacion_actual = null
 func _ready() -> void:
 	$Sprite2D/AnimationPlayer.play("quieto")
 	animacion_actual = "quieto"
+	Controlador.asignar_personaje(self)  # Asegurar que el controlador reconoce al personaje
+	add_to_group("personaje")  # Asegurar que el personaje está en el grupo correcto
 
 func _physics_process(delta: float) -> void:
 	# Aplicar gravedad
 	if not is_on_floor():
 		velocity.y += ProjectSettings.get_setting("physics/2d/default_gravity") * delta
+		
+	var direccion := Input.get_axis("ui_left", "ui_right")
 
 	# Manejar salto
 	if Input.is_action_just_pressed("ui_accept") and is_on_floor():
 		velocity.y = VELOCIDAD_SALTO
+		if direccion > 0:
+			cambiar_animacion("saltar_izquierda")
 
 	# Manejar movimiento del personaje
-	var direccion := Input.get_axis("ui_left", "ui_right")
 	if direccion:
 		velocity.x = direccion * VELOCIDAD
 		if direccion > 0:
 			cambiar_animacion("andar_derecha")
-			direccion_disparo = Vector2.RIGHT  # Actualizar dirección del disparo
+			direccion_disparo = Vector2.RIGHT  
 		elif direccion < 0:
 			cambiar_animacion("andar_izquierda")
-			direccion_disparo = Vector2.LEFT  # Actualizar dirección del disparo
+			direccion_disparo = Vector2.LEFT  
 	else:
 		velocity.x = move_toward(velocity.x, 0, VELOCIDAD)
 		cambiar_animacion("quieto")
 
 	move_and_slide()
+
+	# Comprobar colisión después de moverse
+	for i in range(get_slide_collision_count()):
+		var collision = get_slide_collision(i)
+		if collision.get_collider().is_in_group("enemigo"):
+			_on_hurt()
+
+func _on_hurt():
+	Controlador.restar_vida()
 
 func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("habilidad"):
@@ -74,3 +88,9 @@ func cambiar_animacion(nueva_animacion):
 	if nueva_animacion != animacion_actual:
 		$Sprite2D/AnimationPlayer.play(nueva_animacion)
 		animacion_actual = nueva_animacion
+		
+	
+func reiniciar_estado():
+	# Reiniciar el estado del personaje al ser reposicionado
+	velocity = Vector2.ZERO
+	cambiar_animacion("quieto")

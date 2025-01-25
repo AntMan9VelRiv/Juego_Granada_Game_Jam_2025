@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://c2ucm3i8iqqna"]
+[gd_scene load_steps=9 format=3 uid="uid://c2ucm3i8iqqna"]
 
 [ext_resource type="Script" path="res://escenas/latoxica.gd" id="1_ek2xd"]
 [ext_resource type="Texture2D" uid="uid://deuhdp1gb3ua0" path="res://graficos/burbujas.png" id="2_xdlj8"]
@@ -47,6 +47,9 @@ _data = {
 "mover_izquierda": SubResource("Animation_n1wyl")
 }
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_qn4ib"]
+size = Vector2(18, 18)
+
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_05f1d"]
 size = Vector2(19, 19)
 
@@ -66,6 +69,14 @@ libraries = {
 "": SubResource("AnimationLibrary_8i115")
 }
 
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(4, -4)
+shape = SubResource("RectangleShape2D_qn4ib")
+
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(4, -4)
 shape = SubResource("RectangleShape2D_05f1d")
+
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]

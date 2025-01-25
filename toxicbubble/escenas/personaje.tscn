@@ -1,11 +1,11 @@
-[gd_scene load_steps=10 format=3 uid="uid://0g17gwpfmeay"]
+[gd_scene load_steps=11 format=3 uid="uid://0g17gwpfmeay"]
 
 [ext_resource type="Script" path="res://escenas/personaje.gd" id="1_1l0s6"]
 [ext_resource type="PackedScene" uid="uid://uxlhqy3hujl2" path="res://escenas/habilidad.tscn" id="2_uwv51"]
 [ext_resource type="Texture2D" uid="uid://clpohdpum4qac" path="res://graficos/prota.png" id="3_3odl3"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_shh38"]
-size = Vector2(30, 46)
+size = Vector2(30, 40)
 
 [sub_resource type="Animation" id="Animation_kbujb"]
 length = 0.001
@@ -37,7 +37,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0, 0.1, 0.2, 0.3),
 "transitions": PackedFloat32Array(1, 1, 1, 1),
 "update": 1,
-"values": [5, 6, 7, 8]
+"values": [7, 8, 9, 10]
 }
 
 [sub_resource type="Animation" id="Animation_6flxy"]
@@ -55,7 +55,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0, 0.1, 0.2, 0.3),
 "transitions": PackedFloat32Array(1, 1, 1, 1),
 "update": 1,
-"values": [0, 1, 2, 3]
+"values": [2, 3, 4, 5]
 }
 
 [sub_resource type="Animation" id="Animation_ir2fr"]
@@ -73,7 +73,24 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [4]
+"values": [6]
+}
+
+[sub_resource type="Animation" id="Animation_3soya"]
+resource_name = "saltar_izquierda"
+length = 0.2
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [1, 0]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_qsxwc"]
@@ -81,7 +98,8 @@ _data = {
 "RESET": SubResource("Animation_kbujb"),
 "andar_derecha": SubResource("Animation_5kyre"),
 "andar_izquierda": SubResource("Animation_6flxy"),
-"quieto": SubResource("Animation_ir2fr")
+"quieto": SubResource("Animation_ir2fr"),
+"saltar_izquierda": SubResource("Animation_3soya")
 }
 
 [node name="personaje" type="CharacterBody2D"]
@@ -89,14 +107,14 @@ script = ExtResource("1_1l0s6")
 habilidad = ExtResource("2_uwv51")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(-1, 3)
+position = Vector2(-1, 6)
 shape = SubResource("RectangleShape2D_shh38")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-position = Vector2(-1, 4)
-scale = Vector2(1.81818, 1.96875)
+position = Vector2(-3, 10)
+scale = Vector2(1.66667, 1.73936)
 texture = ExtResource("3_3odl3")
-hframes = 9
+hframes = 13
 frame = 4
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Sprite2D"]

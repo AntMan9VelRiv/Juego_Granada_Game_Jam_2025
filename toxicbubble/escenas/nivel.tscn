@@ -48,8 +48,17 @@ gravity_scale = 0.0
 position = Vector2(1592, 563)
 shape = SubResource("RectangleShape2D_gs287")
 
-[node name="CharacterBody2D" parent="." instance=ExtResource("2_y5ius")]
+[node name="burbujatoxica" parent="." groups=["Player"] instance=ExtResource("2_y5ius")]
 position = Vector2(807, 440)
 
 [node name="personaje" parent="." instance=ExtResource("3_tp6sr")]
 position = Vector2(231, 308)
+
+[node name="Label" type="Label" parent="."]
+custom_minimum_size = Vector2(150, 70)
+offset_left = 6.0
+offset_top = 1.0
+offset_right = 46.0
+offset_bottom = 24.0
+scale = Vector2(2, 2)
+text = "VIDAS: 0"

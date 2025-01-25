@@ -18,10 +18,12 @@ var puede_cambiar_direccion: bool = true  # Bandera para controlar el cambio de 
 @onready var animation_player: AnimationPlayer = $Sprite2D/AnimationPlayer
 @onready var sprite: Sprite2D = $Sprite2D
 
+@onready var area = $Area2D
+
 func _ready() -> void:
-	#Inicialización de dirección aleatoria
+	add_to_group("enemigo")  # Se agrega el enemigo a un grupo para facilitar la detección
 	direction.x = 1 if randf() > 0.5 else -1
-	base_y = position.y  # Guardar la posición base en Y
+	base_y = position.y  
 	animation_player.play("mover")
 	actualizar_sprite()
 
@@ -74,3 +76,12 @@ func cambiar_direccion() -> void:
 	
 func actualizar_sprite() -> void:
 	sprite.scale.x = -1 if direction.x < 0 else 1
+	
+	
+
+
+func _on_area_2d_body_entered(body: Node2D) -> void:
+	if body.is_in_group("personaje"):
+		body._on_hurt()
+		
+	pass # Replace with function body.

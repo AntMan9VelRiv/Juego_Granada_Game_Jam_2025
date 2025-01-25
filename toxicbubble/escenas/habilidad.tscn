@@ -1,7 +1,7 @@
 [gd_scene load_steps=7 format=3 uid="uid://uxlhqy3hujl2"]
 
 [ext_resource type="Script" path="res://escenas/habilidad.gd" id="1_jo4qo"]
-[ext_resource type="Texture2D" uid="uid://bsd04buifg4r3" path="res://graficos/burbujaAzul.png" id="2_818ri"]
+[ext_resource type="Texture2D" uid="uid://bu0aol85c7cru" path="res://graficos/burbija derecha.png" id="2_tu186"]
 
 [sub_resource type="Animation" id="Animation_80s75"]
 length = 0.001
@@ -48,9 +48,8 @@ radius = 13.0384
 script = ExtResource("1_jo4qo")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-texture = ExtResource("2_818ri")
+texture = ExtResource("2_tu186")
 hframes = 5
-vframes = 2
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Sprite2D"]
 root_node = NodePath("../../Area2D/CollisionShape2D")

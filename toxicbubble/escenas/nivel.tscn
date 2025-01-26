@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=4 uid="uid://jrw34epf6kt5"]
+[gd_scene load_steps=20 format=4 uid="uid://jrw34epf6kt5"]
 
 [ext_resource type="Script" path="res://escenas/nivel.gd" id="1_7rx7n"]
 [ext_resource type="PackedScene" uid="uid://c2ucm3i8iqqna" path="res://escenas/latoxica.tscn" id="2_y5ius"]
@@ -6,6 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://dfkaxyxpclyjg" path="res://graficos/prueba.png" id="3_uq1po"]
 [ext_resource type="Texture2D" uid="uid://dabq4u3aq4npp" path="res://graficos/suelo.png" id="4_16c4f"]
 [ext_resource type="PackedScene" uid="uid://b0juh7y73ylc8" path="res://escenas/escalera_putada.tscn" id="6_a7u1w"]
+[ext_resource type="PackedScene" uid="uid://ds4vr8aq0nov1" path="res://escenas/mapa.tscn" id="7_781y1"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_5wg1a"]
 size = Vector2(1919, 161)
@@ -141,11 +142,11 @@ tile_set = SubResource("TileSet_xd0j7")
 gravity_scale = 0.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="RigidBody2D"]
-position = Vector2(1930, 560)
+position = Vector2(-528, -505)
 shape = SubResource("RectangleShape2D_gs287")
 
 [node name="Sprite2D" type="Sprite2D" parent="RigidBody2D/CollisionShape2D"]
-position = Vector2(5.00003, 0.46873)
+position = Vector2(9.00003, 3.99998)
 scale = Vector2(0.586682, 0.576313)
 texture = ExtResource("3_uq1po")
 
@@ -195,6 +196,10 @@ position = Vector2(-1934, -105)
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D2"]
 position = Vector2(518, 788)
 shape = SubResource("RectangleShape2D_s7u32")
+
+[node name="Node2D" parent="." instance=ExtResource("7_781y1")]
+position = Vector2(734, 224)
+scale = Vector2(2, 2)
 
 [connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
 [connection signal="body_entered" from="Area2D2" to="." method="_on_limite_area_2d_2_body_entered"]

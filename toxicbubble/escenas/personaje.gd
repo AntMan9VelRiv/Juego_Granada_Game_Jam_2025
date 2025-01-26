@@ -98,11 +98,13 @@ func _input(event: InputEvent) -> void:
 			nuevaHabilidad.set("velocity", Vector2(-500, 0))  # Establecer la velocidad
 
 		# Ajustamos la posición en Y para que la habilidad aparezca más baja
-		# Ajustamos la altura con base en la posición Y del personaje y el offset
 		nuevaHabilidad.position.y = self.position.y + altura_offset  # Ajuste de altura en Y
 
 		# Agregamos la habilidad como hijo de la escena del jugador
 		get_parent().add_child(nuevaHabilidad)
+
+		# Reproducir el sonido de la habilidad
+		$AudioHabilidad.play()
 		
 func cambiar_animacion(nueva_animacion):
 	if nueva_animacion != animacion_actual:

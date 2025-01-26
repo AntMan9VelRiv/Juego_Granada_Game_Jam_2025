@@ -1,8 +1,9 @@
-[gd_scene load_steps=12 format=3 uid="uid://0g17gwpfmeay"]
+[gd_scene load_steps=13 format=3 uid="uid://0g17gwpfmeay"]
 
 [ext_resource type="Script" path="res://escenas/personaje.gd" id="1_1l0s6"]
 [ext_resource type="PackedScene" uid="uid://uxlhqy3hujl2" path="res://escenas/habilidad.tscn" id="2_uwv51"]
 [ext_resource type="Texture2D" uid="uid://clpohdpum4qac" path="res://graficos/prota.png" id="3_3odl3"]
+[ext_resource type="AudioStream" uid="uid://cics6s23y3wyy" path="res://musica/soplido.mp3" id="4_7xf1p"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_shh38"]
 size = Vector2(30, 40)
@@ -139,3 +140,6 @@ frame = 4
 libraries = {
 "": SubResource("AnimationLibrary_qsxwc")
 }
+
+[node name="AudioHabilidad" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("4_7xf1p")

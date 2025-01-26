@@ -1,0 +1,84 @@
+[gd_scene load_steps=10 format=3 uid="uid://bajnvo68chfpb"]
+
+[ext_resource type="VideoStream" path="res://graficos/menu.ogv" id="1_obvtj"]
+[ext_resource type="Script" path="res://escenas/menu_principal.gd" id="1_yofab"]
+[ext_resource type="Texture2D" uid="uid://3f73qub6tctg" path="res://graficos/boton jugar.png" id="3_2yqn3"]
+[ext_resource type="Texture2D" uid="uid://coa2xhxd1f1o4" path="res://graficos/boton salir.png" id="4_i82qm"]
+[ext_resource type="Texture2D" uid="uid://dvfipawwvjp44" path="res://graficos/boton informacion.png" id="5_j1v45"]
+[ext_resource type="AudioStream" uid="uid://cicdgwtmt8aig" path="res://musica/Max DnB _11.wav" id="5_jo4uc"]
+[ext_resource type="Texture2D" uid="uid://b8oylahwfo2ar" path="res://graficos/controles.png" id="6_30agx"]
+[ext_resource type="Texture2D" uid="uid://bcah3wfubdf6b" path="res://graficos/titulo (1).png" id="7_rm48r"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_bg2hi"]
+bg_color = Color(0, 0, 0, 0.67451)
+shadow_color = Color(0.000693898, 0.000693898, 0.000693898, 0.6)
+
+[node name="Node2D" type="Node2D"]
+script = ExtResource("1_yofab")
+
+[node name="VideoStreamPlayer" type="VideoStreamPlayer" parent="."]
+offset_right = 1156.0
+offset_bottom = 652.0
+stream = ExtResource("1_obvtj")
+autoplay = true
+expand = true
+loop = true
+
+[node name="ButtonJugar" type="Button" parent="."]
+offset_left = 552.0
+offset_top = 188.0
+offset_right = 628.0
+offset_bottom = 213.0
+
+[node name="Sprite2D" type="Sprite2D" parent="ButtonJugar"]
+position = Vector2(249, 48)
+scale = Vector2(3, 3)
+texture = ExtResource("3_2yqn3")
+
+[node name="ButtonSalir" type="Button" parent="."]
+offset_left = 560.0
+offset_top = 331.0
+offset_right = 615.0
+offset_bottom = 349.0
+
+[node name="Sprite2D" type="Sprite2D" parent="ButtonSalir"]
+position = Vector2(275, -19)
+scale = Vector2(3, 3)
+texture = ExtResource("4_i82qm")
+
+[node name="ButtonInformacion" type="Button" parent="."]
+offset_left = 529.0
+offset_top = 256.0
+offset_right = 644.0
+offset_bottom = 277.0
+
+[node name="Sprite2D" type="Sprite2D" parent="ButtonInformacion"]
+position = Vector2(302, 62)
+scale = Vector2(3, 3)
+texture = ExtResource("5_j1v45")
+
+[node name="Panel" type="Panel" parent="ButtonInformacion"]
+layout_mode = 0
+offset_left = -35.0
+offset_top = 119.0
+offset_right = 145.0
+offset_bottom = 303.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_bg2hi")
+
+[node name="SpriteInformacion" type="Sprite2D" parent="ButtonInformacion/Panel"]
+position = Vector2(226, 89)
+scale = Vector2(2, 2)
+texture = ExtResource("6_30agx")
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("5_jo4uc")
+autoplay = true
+
+[node name="Sprite2DTitulo" type="Sprite2D" parent="."]
+position = Vector2(597, 77)
+scale = Vector2(0.515889, 0.519512)
+texture = ExtResource("7_rm48r")
+
+[connection signal="pressed" from="ButtonJugar" to="." method="_on_button_jugar_pressed"]
+[connection signal="pressed" from="ButtonSalir" to="." method="_on_button_salir_pressed"]
+[connection signal="pressed" from="ButtonInformacion" to="." method="_on_button_informacion_pressed"]

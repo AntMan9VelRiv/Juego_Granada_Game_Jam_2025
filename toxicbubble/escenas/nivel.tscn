@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=4 uid="uid://jrw34epf6kt5"]
+[gd_scene load_steps=24 format=4 uid="uid://jrw34epf6kt5"]
 
 [ext_resource type="Script" path="res://escenas/nivel.gd" id="1_7rx7n"]
 [ext_resource type="PackedScene" uid="uid://c2ucm3i8iqqna" path="res://escenas/latoxica.tscn" id="2_y5ius"]
@@ -8,6 +8,9 @@
 [ext_resource type="PackedScene" uid="uid://b0juh7y73ylc8" path="res://escenas/escalera_putada.tscn" id="6_a7u1w"]
 [ext_resource type="PackedScene" uid="uid://ds4vr8aq0nov1" path="res://escenas/mapa.tscn" id="7_781y1"]
 [ext_resource type="Texture2D" uid="uid://djc77wpid3cm0" path="res://graficos/fondo.png" id="8_myu3v"]
+[ext_resource type="Texture2D" uid="uid://1656pjt0apet" path="res://graficos/burbua rojallena.png" id="9_w6txp"]
+[ext_resource type="Texture2D" uid="uid://dbwdkv7hiary" path="res://graficos/burbua roja vacia.png" id="10_bxkbn"]
+[ext_resource type="AudioStream" uid="uid://7vym1s5tyg6q" path="res://musica/Basic Dubstep_10.wav" id="11_7i0j0"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_5wg1a"]
 size = Vector2(1919, 161)
@@ -78,10 +81,9 @@ size = Vector2(71.5, 59.5)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_s7u32"]
 size = Vector2(9593, 295)
 
-[node name="Node2D" type="Node2D" node_paths=PackedStringArray("rigidbody_to_change")]
+[node name="Node2D" type="Node2D"]
 position = Vector2(-2, 1)
 script = ExtResource("1_7rx7n")
-rigidbody_to_change = NodePath("RigidBody2D")
 
 [node name="StaticBody2D" type="StaticBody2D" parent="."]
 position = Vector2(15, -10)
@@ -162,23 +164,6 @@ scale = Vector2(2, 2)
 
 [node name="Camera2D" type="Camera2D" parent="personaje"]
 
-[node name="LabelVidas" type="Label" parent="."]
-custom_minimum_size = Vector2(150, 70)
-offset_left = 6.0
-offset_top = 1.0
-offset_right = 156.0
-offset_bottom = 71.0
-scale = Vector2(2, 2)
-text = "VIDAS: 0"
-
-[node name="LabelBurbujas" type="Label" parent="."]
-offset_left = 165.0
-offset_top = 1.0
-offset_right = 363.0
-offset_bottom = 24.0
-scale = Vector2(2, 2)
-text = "BURBUJAS DESTRUIDAS: 0"
-
 [node name="CharacterBody2D" parent="." instance=ExtResource("2_y5ius")]
 position = Vector2(-1500, 267)
 scale = Vector2(3, 3)
@@ -245,6 +230,52 @@ scale = Vector2(3, 3)
 [node name="CharacterBody2D9" parent="." instance=ExtResource("2_y5ius")]
 position = Vector2(1379, 435)
 scale = Vector2(3, 3)
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="LabelVidas" type="Label" parent="CanvasLayer"]
+custom_minimum_size = Vector2(150, 70)
+offset_left = 4.0
+offset_top = 2.0
+offset_right = 154.0
+offset_bottom = 72.0
+scale = Vector2(2, 2)
+text = "VIDAS: "
+
+[node name="VidasContainer" type="HBoxContainer" parent="CanvasLayer"]
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Sprite2DVida1" type="Sprite2D" parent="CanvasLayer/VidasContainer"]
+position = Vector2(136, 31)
+texture = ExtResource("9_w6txp")
+
+[node name="Sprite2DVida2" type="Sprite2D" parent="CanvasLayer/VidasContainer"]
+position = Vector2(197, 29)
+texture = ExtResource("9_w6txp")
+
+[node name="Sprite2DVida3" type="Sprite2D" parent="CanvasLayer/VidasContainer"]
+position = Vector2(261, 29)
+texture = ExtResource("9_w6txp")
+
+[node name="Sprite2DVidaVacia1" type="Sprite2D" parent="CanvasLayer/VidasContainer"]
+visible = false
+position = Vector2(137, 29)
+texture = ExtResource("10_bxkbn")
+
+[node name="Sprite2DVidaVacia2" type="Sprite2D" parent="CanvasLayer/VidasContainer"]
+visible = false
+position = Vector2(200, 28)
+texture = ExtResource("10_bxkbn")
+
+[node name="Sprite2DVidaVacia3" type="Sprite2D" parent="CanvasLayer/VidasContainer"]
+visible = false
+position = Vector2(263, 27)
+texture = ExtResource("10_bxkbn")
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("11_7i0j0")
+autoplay = true
 
 [connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
 [connection signal="body_entered" from="Area2D2" to="." method="_on_limite_area_2d_2_body_entered"]

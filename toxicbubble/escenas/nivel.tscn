@@ -142,11 +142,11 @@ tile_set = SubResource("TileSet_xd0j7")
 gravity_scale = 0.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="RigidBody2D"]
-position = Vector2(-528, -505)
+position = Vector2(1930, 560)
 shape = SubResource("RectangleShape2D_gs287")
 
 [node name="Sprite2D" type="Sprite2D" parent="RigidBody2D/CollisionShape2D"]
-position = Vector2(9.00003, 3.99998)
+position = Vector2(5.00003, 0.46873)
 scale = Vector2(0.586682, 0.576313)
 texture = ExtResource("3_uq1po")
 

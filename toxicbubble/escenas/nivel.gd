@@ -12,10 +12,12 @@ func _ready():
 	
 	# Asignar referencias al controlador si existe
 	if Controlador:
+		Controlador.vidas_container = $CanvasLayer/VidasContainer  # ASIGNAR PRIMERO EL CONTENEDOR
 		Controlador.asignar_personaje(personaje)
 		Controlador.asignar_label_vidas(label_vidas)
 		Controlador.total_burbujas = 10
-		Controlador.vidas_container = $CanvasLayer/VidasContainer
+		Controlador.inicializar_vidas()
+
 
 func _on_area_2d_body_entered(body: Node2D) -> void:
 	if body == personaje:

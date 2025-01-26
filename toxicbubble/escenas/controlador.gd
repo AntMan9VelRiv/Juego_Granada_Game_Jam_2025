@@ -76,16 +76,29 @@ func añadir_vida():
 	actualizar_vidas()
 
 func actualizar_vidas():
+	if not vidas_container:
+		print("Error: HBoxContainer no asignado.")
+		return
+
 	if not corazones_llenos or not corazones_vacios:
 		print("Error: No se pueden actualizar las vidas, listas vacías.")
 		return
 
+	# Recorremos en orden inverso para manejar vidas de derecha a izquierda
 	for i in range(vidas_iniciales):
-		corazones_llenos[i].visible = i < vidas_actuales
-		corazones_vacios[i].visible = i >= vidas_actuales
+		var idx = vidas_iniciales - 1 - i  # Invertimos el índice para hacerlo de derecha a izquierda
+		
+		if i < vidas_actuales:
+			corazones_llenos[idx].visible = true
+			corazones_vacios[idx].visible = false
+		else:
+			corazones_llenos[idx].visible = false
+			corazones_vacios[idx].visible = true
 
 	if etiqueta_vidas:
 		etiqueta_vidas.text = "VIDAS: " + str(vidas_actuales)
+
+
 
 func reposicionar_personaje():
 	if is_instance_valid(personaje):
@@ -139,14 +152,33 @@ func goto_derrota():
 
 func reiniciar_variables():
 	print("Reiniciando variables del juego...")
-	
-	# Reiniciar todas las variables del juego a sus valores iniciales
 	vidas_actuales = vidas_iniciales
 	burbujas_destruidas = 0
 	derrota = false
-	personaje = null
-	vidas_container = null
-	current_scene = null
 	
-	corazones_llenos.clear()
-	corazones_vacios.clear()
+	# NO eliminar referencias a nodos asignados, solo reiniciar valores
+	actualizar_vidas()
+	actualizar_burbujas_label()
+
+
+func inicializar_vidas():
+	if vidas_container:
+		print("HBoxContainer encontrado correctamente.")
+		corazones_llenos.clear()
+		corazones_vacios.clear()
+		
+		for child in vidas_container.get_children():
+			if child.name.begins_with("Sprite2DVida") and not child.name.contains("Vacia"):
+				corazones_llenos.append(child)
+			elif child.name.begins_with("Sprite2DVidaVacia"):
+				corazones_vacios.append(child)
+
+		corazones_llenos.sort_custom(Callable(self, "_ordenar_por_nombre"))
+		corazones_vacios.sort_custom(Callable(self, "_ordenar_por_nombre"))
+
+		print("Corazones llenos ordenados:", corazones_llenos)
+		print("Corazones vacíos ordenados:", corazones_vacios)
+
+		actualizar_vidas()
+	else:
+		print("Error: HBoxContainer no asignado.")

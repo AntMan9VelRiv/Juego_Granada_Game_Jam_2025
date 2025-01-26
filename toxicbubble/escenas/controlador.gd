@@ -89,16 +89,19 @@ func actualizar_vidas():
 		var idx = vidas_iniciales - 1 - i  # Invertimos el índice para hacerlo de derecha a izquierda
 		
 		if i < vidas_actuales:
-			corazones_llenos[idx].visible = true
-			corazones_vacios[idx].visible = false
+			# Verificamos si el nodo es válido antes de intentar modificarlo
+			if is_instance_valid(corazones_llenos[idx]):
+				corazones_llenos[idx].visible = true
+			if is_instance_valid(corazones_vacios[idx]):
+				corazones_vacios[idx].visible = false
 		else:
-			corazones_llenos[idx].visible = false
-			corazones_vacios[idx].visible = true
+			if is_instance_valid(corazones_llenos[idx]):
+				corazones_llenos[idx].visible = false
+			if is_instance_valid(corazones_vacios[idx]):
+				corazones_vacios[idx].visible = true
 
 	if etiqueta_vidas:
 		etiqueta_vidas.text = "VIDAS: " + str(vidas_actuales)
-
-
 
 func reposicionar_personaje():
 	if is_instance_valid(personaje):
@@ -121,7 +124,6 @@ func jugadorCaido():
 		get_tree().current_scene.queue_free()  # Eliminar la escena actual antes de cargar la nueva
 		goto_scene("res://escenas/nivel.tscn")
 
-
 func actualizar_burbujas_destruidas():
 	burbujas_destruidas += 1
 	actualizar_burbujas_label()
@@ -136,19 +138,24 @@ func goto_scene(path: String):
 	call_deferred("_deferred_goto_scene", path)
 
 func _deferred_goto_scene(path: String):
+	# Primero eliminamos la escena actual de forma segura
 	if is_instance_valid(current_scene):
-		current_scene.queue_free()
+		current_scene.queue_free()  # Deja que la escena se elimine de forma correcta
+	
+	# Ahora cargamos la nueva escena
 	var nueva_escena = load(path).instantiate()
-	get_tree().root.add_child(nueva_escena)
-	get_tree().current_scene = nueva_escena
-	current_scene = nueva_escena
+	get_tree().root.add_child(nueva_escena)  # Añadimos la nueva escena al árbol de escenas
+	get_tree().current_scene = nueva_escena  # Establecemos la nueva escena como la actual
+	current_scene = nueva_escena  # Actualizamos la referencia
 	print("Nueva escena cargada:", nueva_escena.name)
 
 func goto_victoria():
-	goto_scene("res://escenas/victoria.tscn")
+	# Llamamos a _deferred_goto_scene con la escena de victoria
+	call_deferred("_deferred_goto_scene", "res://escenas/victoria.tscn")
 
 func goto_derrota():
-	goto_scene("res://escenas/derrota.tscn")
+	# Llamamos a _deferred_goto_scene con la escena de derrota
+	call_deferred("_deferred_goto_scene", "res://escenas/derrota.tscn")
 
 func reiniciar_variables():
 	print("Reiniciando variables del juego...")
@@ -159,7 +166,6 @@ func reiniciar_variables():
 	# NO eliminar referencias a nodos asignados, solo reiniciar valores
 	actualizar_vidas()
 	actualizar_burbujas_label()
-
 
 func inicializar_vidas():
 	if vidas_container:

@@ -16,11 +16,16 @@ func _ready():
 		Controlador.total_burbujas = 1	
 
 func _on_area_2d_body_entered(body: Node2D) -> void:
-	if body == personaje:  # Asegurarnos de que sea el personaje exacto
-		if rigidbody_to_change:
-			rigidbody_to_change.freeze = false  # Descongelar el objeto si estaba congelado
-			rigidbody_to_change.gravity_scale = 1  # Activar la gravedad
-			rigidbody_to_change.apply_impulse(Vector2.ZERO, Vector2(0, 50))  # Pequeño empujón hacia abajo
+	if body == personaje:
+		print("Personaje ha entrado al área")
+		
+		if is_instance_valid(rigidbody_to_change):
+			print("RigidBody detectado correctamente")
+			rigidbody_to_change.freeze = false
+			rigidbody_to_change.gravity_scale = 1.0
+			rigidbody_to_change.apply_impulse(Vector2.ZERO, Vector2(0, 500))
+		else:
+			print("El RigidBody2D no está asignado correctamente")
 
 
 func _on_limite_area_2d_2_body_entered(body: Node2D) -> void:

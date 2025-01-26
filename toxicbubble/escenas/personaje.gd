@@ -75,7 +75,8 @@ func _physics_process(delta: float) -> void:
 	for i in range(get_slide_collision_count()):
 		var collision = get_slide_collision(i)
 		if collision.get_collider().is_in_group("enemigo"):
-			_on_hurt()
+			Controlador.reposicionar_personaje()
+			Controlador.restar_vida()
 
 func _on_hurt():
 	Controlador.restar_vida()

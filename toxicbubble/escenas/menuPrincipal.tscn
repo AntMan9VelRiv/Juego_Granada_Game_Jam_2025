@@ -10,7 +10,7 @@
 [ext_resource type="Texture2D" uid="uid://bcah3wfubdf6b" path="res://graficos/titulo (1).png" id="7_rm48r"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_bg2hi"]
-bg_color = Color(0, 0, 0, 0.67451)
+bg_color = Color(0, 0, 0, 0.74902)
 shadow_color = Color(0.000693898, 0.000693898, 0.000693898, 0.6)
 
 [node name="Node2D" type="Node2D"]
@@ -25,50 +25,64 @@ expand = true
 loop = true
 
 [node name="ButtonJugar" type="Button" parent="."]
-offset_left = 552.0
-offset_top = 188.0
-offset_right = 628.0
-offset_bottom = 213.0
+offset_left = 518.0
+offset_top = 182.0
+offset_right = 653.0
+offset_bottom = 223.0
 
 [node name="Sprite2D" type="Sprite2D" parent="ButtonJugar"]
-position = Vector2(249, 48)
-scale = Vector2(3, 3)
+position = Vector2(427, 78)
+scale = Vector2(5, 5)
 texture = ExtResource("3_2yqn3")
 
 [node name="ButtonSalir" type="Button" parent="."]
-offset_left = 560.0
-offset_top = 331.0
-offset_right = 615.0
-offset_bottom = 349.0
+offset_left = 524.0
+offset_top = 313.0
+offset_right = 634.0
+offset_bottom = 346.0
 
 [node name="Sprite2D" type="Sprite2D" parent="ButtonSalir"]
-position = Vector2(275, -19)
-scale = Vector2(3, 3)
+position = Vector2(478, -25)
+scale = Vector2(5, 5)
 texture = ExtResource("4_i82qm")
 
 [node name="ButtonInformacion" type="Button" parent="."]
-offset_left = 529.0
-offset_top = 256.0
-offset_right = 644.0
-offset_bottom = 277.0
+offset_left = 488.0
+offset_top = 251.0
+offset_right = 686.0
+offset_bottom = 288.0
 
 [node name="Sprite2D" type="Sprite2D" parent="ButtonInformacion"]
-position = Vector2(302, 62)
-scale = Vector2(3, 3)
+position = Vector2(507, 102)
+scale = Vector2(5, 5)
 texture = ExtResource("5_j1v45")
 
 [node name="Panel" type="Panel" parent="ButtonInformacion"]
 layout_mode = 0
-offset_left = -35.0
-offset_top = 119.0
-offset_right = 145.0
-offset_bottom = 303.0
+offset_left = -220.0
+offset_top = 123.0
+offset_right = 424.0
+offset_bottom = 307.0
 theme_override_styles/panel = SubResource("StyleBoxFlat_bg2hi")
 
 [node name="SpriteInformacion" type="Sprite2D" parent="ButtonInformacion/Panel"]
 position = Vector2(226, 89)
 scale = Vector2(2, 2)
 texture = ExtResource("6_30agx")
+
+[node name="LabelLore" type="Label" parent="ButtonInformacion/Panel"]
+layout_mode = 0
+offset_left = 190.0
+offset_top = 22.0
+offset_right = 628.0
+offset_bottom = 156.0
+theme_override_colors/font_color = Color(0, 0.654902, 0, 1)
+theme_override_colors/font_shadow_color = Color(0.52549, 0.52549, 0.52549, 1)
+text = "En un mundo donde las burbujas toxicas aterrorizan e 
+intoxican la ciudad, nuestra heroina Mariloli y su
+pompero intentara sortear los obstaculos que se
+encuentre por el camino para acabar con esas podridas
+y nocivas esferas."
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("5_jo4uc")

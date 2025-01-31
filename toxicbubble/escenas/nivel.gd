@@ -15,7 +15,7 @@ func _ready():
 		Controlador.vidas_container = $CanvasLayer/VidasContainer  # ASIGNAR PRIMERO EL CONTENEDOR
 		Controlador.asignar_personaje(personaje)
 		Controlador.asignar_label_vidas(label_vidas)
-		Controlador.total_burbujas = 1
+		Controlador.total_burbujas = 10
 		Controlador.inicializar_vidas()
 
 

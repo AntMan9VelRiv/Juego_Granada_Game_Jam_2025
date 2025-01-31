@@ -101,7 +101,7 @@ func actualizar_vidas():
 				corazones_vacios[idx].visible = true
 
 	if etiqueta_vidas:
-		etiqueta_vidas.text = "VIDAS: " + str(vidas_actuales)
+		etiqueta_vidas.text = "VIDAS: "
 
 func reposicionar_personaje():
 	if is_instance_valid(personaje):

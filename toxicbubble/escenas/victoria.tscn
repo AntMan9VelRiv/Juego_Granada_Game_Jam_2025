@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://bnay6ttl1jf8p"]
+[gd_scene load_steps=9 format=3 uid="uid://bnay6ttl1jf8p"]
 
 [ext_resource type="VideoStream" path="res://graficos/Sequence-_2_.ogv" id="1_awhfa"]
 [ext_resource type="Script" path="res://escenas/victoria.gd" id="1_nq277"]
@@ -6,6 +6,10 @@
 [ext_resource type="Texture2D" uid="uid://coa2xhxd1f1o4" path="res://graficos/boton salir.png" id="4_q4xck"]
 [ext_resource type="Texture2D" uid="uid://b8212jbi8cf5p" path="res://graficos/boton repetir.png" id="5_giw4c"]
 [ext_resource type="AudioStream" uid="uid://demtoh4chtr27" path="res://musica/victoriaMod.mp3" id="6_bhb0k"]
+[ext_resource type="Texture2D" uid="uid://syo7q2p7hq5t" path="res://graficos/creditos.png" id="7_040t6"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_o3n8w"]
+bg_color = Color(0, 0, 0, 0.858824)
 
 [node name="Node2D" type="Node2D"]
 script = ExtResource("1_nq277")
@@ -34,10 +38,10 @@ scale = Vector2(5, 5)
 texture = ExtResource("4_q4xck")
 
 [node name="ButtonRepetir" type="Button" parent="."]
-offset_left = 528.0
-offset_top = 433.0
-offset_right = 618.0
-offset_bottom = 462.0
+offset_left = 527.0
+offset_top = 377.0
+offset_right = 617.0
+offset_bottom = 406.0
 
 [node name="Sprite2D" type="Sprite2D" parent="ButtonRepetir"]
 position = Vector2(459, -98)
@@ -48,6 +52,48 @@ texture = ExtResource("5_giw4c")
 stream = ExtResource("6_bhb0k")
 autoplay = true
 
+[node name="ButtonCreditos" type="Button" parent="."]
+offset_left = 515.0
+offset_top = 439.0
+offset_right = 647.0
+offset_bottom = 467.0
+
+[node name="Sprite2D" type="Sprite2D" parent="ButtonCreditos"]
+position = Vector2(69, 12)
+scale = Vector2(5, 5)
+texture = ExtResource("7_040t6")
+
+[node name="PanelCreditos" type="Panel" parent="ButtonCreditos"]
+layout_mode = 0
+offset_left = -96.0
+offset_top = -424.0
+offset_right = 212.0
+offset_bottom = -78.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_o3n8w")
+
+[node name="LabelCreditos" type="Label" parent="ButtonCreditos/PanelCreditos"]
+layout_mode = 0
+offset_left = 10.0
+offset_top = 10.0
+offset_right = 300.0
+offset_bottom = 338.0
+theme_override_colors/font_color = Color(0, 0.654902, 0, 1)
+theme_override_colors/font_shadow_color = Color(0.52549, 0.52549, 0.52549, 1)
+text = "
+PROGRAMADORES:
+Antonio Manuel Velasco Rivera
+Hanok Martin Exposito
+Cristian Zambrano Muñoz
+
+ARTISTA:
+Helena Fernandez Delgado
+
+MUSICA:
+Antonio Manuel Velasco Rivera
+"
+horizontal_alignment = 1
+
 [connection signal="finished" from="VideoStreamPlayer" to="." method="_on_video_stream_player_finished"]
 [connection signal="pressed" from="ButtonSalir" to="." method="_on_button_salir_pressed"]
 [connection signal="pressed" from="ButtonRepetir" to="." method="_on_button_repetir_pressed"]
+[connection signal="pressed" from="ButtonCreditos" to="." method="_on_button_creditos_pressed"]

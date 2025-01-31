@@ -23,6 +23,10 @@ Controlador="*res://escenas/controlador.gd"
 
 window/stretch/mode="viewport"
 
+[dotnet]
+
+project/assembly_name="ToxicBubble"
+
 [input]
 
 habilidad={

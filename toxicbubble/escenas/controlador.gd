@@ -151,10 +151,12 @@ func _deferred_goto_scene(path: String):
 
 func goto_victoria():
 	# Llamamos a _deferred_goto_scene con la escena de victoria
+	get_tree().current_scene.queue_free()  # Eliminar la escena actual antes de cargar la nueva
 	call_deferred("_deferred_goto_scene", "res://escenas/victoria.tscn")
 
 func goto_derrota():
 	# Llamamos a _deferred_goto_scene con la escena de derrota
+	get_tree().current_scene.queue_free()  # Eliminar la escena actual antes de cargar la nueva
 	call_deferred("_deferred_goto_scene", "res://escenas/derrota.tscn")
 
 func reiniciar_variables():

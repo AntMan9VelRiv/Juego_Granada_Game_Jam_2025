@@ -15,7 +15,7 @@ func _on_video_stream_player_finished() -> void:
 
 func _on_button_repetir_pressed() -> void:
 	Controlador.reiniciar_variables()
-	get_tree().change_scene_to_file("res://escenas/nivel.tscn")
+	Controlador.goto_scene("res://escenas/nivel.tscn")
 
 func _on_button_salir_pressed() -> void:
 	print("Botón presionado")  # Depuración
@@ -23,4 +23,4 @@ func _on_button_salir_pressed() -> void:
 
 func cambiar_escena():
 	var current_scene_path = get_tree().current_scene.get_scene_file_path()
-	get_tree().change_scene_to_file(current_scene_path)
+	Controlador.goto_scene(current_scene_path)
